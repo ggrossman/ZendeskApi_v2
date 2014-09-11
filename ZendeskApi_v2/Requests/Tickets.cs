@@ -53,14 +53,14 @@ namespace ZendeskApi_v2.Requests
 		GroupAuditResponse GetAudits(long ticketId);
 		IndividualAuditResponse GetAuditById(long ticketId, long auditId);
 		bool MarkAuditAsTrusted(long ticketId, long auditId);
-		TicketExportResponse GetInrementalTicketExport(DateTime startTime);
+		TicketExportResponse GetIncrementalTicketExport(DateTime startTime);
 
 		/// <summary>
 		/// Since the other method can only be called once every 5 minutes it is not sutable for Automated tests.
 		/// </summary>
 		/// <param name="startTime"></param>
 		/// <returns></returns>
-		TicketExportResponse __TestOnly__GetInrementalTicketExport(DateTime startTime);
+		TicketExportResponse __TestOnly__GetIncrementalTicketExport(DateTime startTime);
 
 		GroupTicketFieldResponse GetTicketFields();
 		IndividualTicketFieldResponse GetTicketFieldById(long id);
@@ -107,14 +107,14 @@ namespace ZendeskApi_v2.Requests
 		Task<GroupAuditResponse> GetAuditsAsync(long ticketId);
 		Task<IndividualAuditResponse> GetAuditByIdAsync(long ticketId, long auditId);
 		Task<bool> MarkAuditAsTrustedAsync(long ticketId, long auditId);
-		Task<TicketExportResponse> GetInrementalTicketExportAsync(DateTime startTime);
+		Task<TicketExportResponse> GetIncrementalTicketExportAsync(DateTime startTime);
 
 		/// <summary>
 		/// Since the other method can only be called once every 5 minutes it is not sutable for Automated tests.
 		/// </summary>
 		/// <param name="startTime"></param>
 		/// <returns></returns>
-		Task<TicketExportResponse> __TestOnly__GetInrementalTicketExportAsync(DateTime startTime);
+		Task<TicketExportResponse> __TestOnly__GetIncrementalTicketExportAsync(DateTime startTime);
 
 		Task<GroupTicketFieldResponse> GetTicketFieldsAsync();
 		Task<IndividualTicketFieldResponse> GetTicketFieldByIdAsync(long id);
@@ -321,7 +321,7 @@ namespace ZendeskApi_v2.Requests
             return res.HttpStatusCode == HttpStatusCode.OK;
         }
 
-        public TicketExportResponse GetInrementalTicketExport(DateTime startTime)
+        public TicketExportResponse GetIncrementalTicketExport(DateTime startTime)
         {            
             return GenericGet<TicketExportResponse>("exports/tickets.json?start_time=" + startTime.GetEpoch());
         }
@@ -331,7 +331,7 @@ namespace ZendeskApi_v2.Requests
         /// </summary>
         /// <param name="startTime"></param>
         /// <returns></returns>
-        public TicketExportResponse __TestOnly__GetInrementalTicketExport(DateTime startTime)
+        public TicketExportResponse __TestOnly__GetIncrementalTicketExport(DateTime startTime)
         {
             return GenericGet<TicketExportResponse>("exports/tickets/sample.json?start_time=" + startTime.GetEpoch());
         }
@@ -549,7 +549,7 @@ namespace ZendeskApi_v2.Requests
             return await res.ContinueWith(x => x.Result.HttpStatusCode == HttpStatusCode.OK);            
         }
 
-        public async Task<TicketExportResponse> GetInrementalTicketExportAsync(DateTime startTime)
+        public async Task<TicketExportResponse> GetIncrementalTicketExportAsync(DateTime startTime)
         {            
             return await GenericGetAsync<TicketExportResponse>("exports/tickets.json?start_time=" + startTime.GetEpoch());
         }
@@ -559,7 +559,7 @@ namespace ZendeskApi_v2.Requests
         /// </summary>
         /// <param name="startTime"></param>
         /// <returns></returns>
-        public async Task<TicketExportResponse> __TestOnly__GetInrementalTicketExportAsync(DateTime startTime)
+        public async Task<TicketExportResponse> __TestOnly__GetIncrementalTicketExportAsync(DateTime startTime)
         {
             return await GenericGetAsync<TicketExportResponse>("exports/tickets/sample.json?start_time=" + startTime.GetEpoch());
         }
